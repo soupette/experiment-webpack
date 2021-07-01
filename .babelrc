@@ -1,4 +1,14 @@
 {
   "presets": ["@babel/preset-env"],
-  "plugins": ["./plugin"]
+  "plugins": [
+    [
+      "./plugin",
+      {
+        "roots": {
+          "eeRoot": "./ee",
+          "ceRoot": "./src"
+        }
+      }
+    ]
+  ]
 }

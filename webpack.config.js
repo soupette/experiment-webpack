@@ -34,7 +34,27 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
-            plugins: ['./plugin', '@babel/plugin-transform-runtime'],
+            plugins: [
+              [
+                '@babel/plugin-transform-runtime',
+                {
+                  absoluteRuntime: true,
+                  // "corejs": false,
+                  helpers: true,
+                  regenerator: true,
+                  // "version": "7.0.0-beta.0"
+                },
+              ],
+              [
+                './plugin',
+                {
+                  roots: {
+                    eeRoot: './ee',
+                    ceRoot: './src',
+                  },
+                },
+              ],
+            ],
           },
         },
       },

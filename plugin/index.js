@@ -1,4 +1,5 @@
 const transformImport = require('./transformers/import');
+const normalizeOptions = require('./normalizeOptions');
 
 const importVisitors = {
   ImportDeclaration: transformImport,
@@ -20,8 +21,12 @@ module.exports = ({ template, types: t }) => {
     name: 'module-resolver',
     visitor,
 
-    pre() {
+    pre(file) {
       this.types = t;
+
+      const currentFile = file.opts.filename;
+
+      this.normalizedOpts = normalizeOptions(currentFile, this.opts);
 
       this.moduleResolverVisited = new Set();
     },
